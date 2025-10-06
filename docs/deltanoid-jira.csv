@@ -1,0 +1,21 @@
+Issue Type,Summary,Description,Priority,Labels,Story Points
+Task,Configure email integration for contact form,Set up SendGrid or Resend integration through Replit integrations panel to enable contact form email notifications. Update app/api/contact/route.ts with proper email sending logic.,High,"backend,integration,email",3
+Task,Add reCAPTCHA to contact form,Implement Google reCAPTCHA v3 on contact form to prevent spam submissions. Add verification in API route.,Medium,"frontend,backend,security",5
+Task,Create production OG image,Design and add 1200x630px Open Graph image for social media sharing at /public/assets/og-image.jpg,Medium,"design,seo",2
+Task,Update business contact information,Replace placeholder phone number and address in JSON-LD schema and contact page with actual business details,High,"content,seo",1
+Task,Test accessibility with screen readers,Conduct thorough testing with NVDA/JAWS (Windows) and VoiceOver (Mac/iOS) across all pages,High,"accessibility,qa",3
+Task,Run Lighthouse audits,Execute Lighthouse performance audits on mobile and desktop for all major pages. Target: Performance 100 SEO 100 Accessibility ≥95,High,"performance,qa,seo",2
+Task,Configure security headers at hosting level,Set up security headers in hosting platform (Vercel/Netlify) configuration files based on next.config.js documentation,High,"security,devops",2
+Task,Implement next/image for assets,Replace standard img tags with Next.js Image component for automatic optimization in key components (Hero sections page headers),Medium,"performance,frontend",3
+Task,Set up database for contact submissions,Add database schema and storage for contact form submissions. Consider using existing Neon database or alternative storage solution,Low,"backend,database",5
+Task,Integrate CRM for contact management,Connect contact form to CRM system (HubSpot Salesforce etc) for lead management and follow-up automation,Low,"backend,integration,crm",8
+Task,Add sitemap generation,Implement automatic XML sitemap generation for better SEO crawling and indexing,Medium,"seo,backend",2
+Task,Set up robots.txt,Create and configure robots.txt file with proper directives for search engine crawlers,Low,"seo",1
+Task,Test contact form validation,Comprehensive testing of all form fields including edge cases error messages and success states,High,"qa,frontend",2
+Task,Verify JSON-LD structured data,Validate LocalBusiness schema using Google Rich Results Test and Search Console,High,"seo,qa",1
+Task,Mobile responsive testing,Test all pages on various mobile devices and screen sizes ensuring proper rendering and interaction,High,"qa,frontend,mobile",3
+Task,Cross-browser testing,Test application functionality and appearance on Chrome Firefox Safari and Edge browsers,Medium,"qa,frontend",2
+Task,Set up error monitoring,Implement error tracking and monitoring solution (Sentry LogRocket etc) for production issues,Medium,"devops,monitoring",3
+Task,Create privacy policy page,Draft and publish privacy policy page addressing data collection cookie usage and GDPR compliance,Medium,"legal,content",2
+Task,Add loading states to all forms,Ensure all forms have proper loading indicators and disabled states during submission,Low,"frontend,ux",2
+Task,Implement rate limiting on API,Add rate limiting to contact API endpoint to prevent abuse (consider using Upstash Rate Limit),Medium,"backend,security",3

@@ -1,0 +1,282 @@
+1. SEO + META Setup (App Router version)
+app/layout.tsx
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Deltanoid — We Build. We Scale. You Relax.",
+  description:
+    "Deltanoid helps businesses scale across SaaS, hospitality, and wellness — combining product, marketing, and reputation to deliver measurable growth.",
+  metadataBase: new URL("https://www.deltanoid.in"),
+  alternates: { canonical: "https://www.deltanoid.in" },
+  openGraph: {
+    title: "Deltanoid — We Build. We Scale. You Relax.",
+    description:
+      "Your trusted partner for SaaS, marketing and reputation management. Smart tech. Proven results. Zero chaos.",
+    url: "https://www.deltanoid.in",
+    siteName: "Deltanoid",
+    images: [
+      {
+        url: "/assets/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Deltanoid — Digital Growth Agency",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Deltanoid — We Build. We Scale. You Relax.",
+    description:
+      "Your trusted partner for SaaS, marketing and reputation management.",
+    images: ["/assets/og-image.jpg"],
+  },
+  themeColor: "#0b5cff",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+
+
+✅ Why this works:
+Next.js now handles SEO natively via metadata object — no need for manual <meta> in _document.tsx.
+
+🧩 2. Structured Data (JSON-LD)
+Add to app/layout.tsx inside <body> or app/page.tsx:
+import Script from "next/script";
+
+<Script
+  id="ldjson"
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: "Deltanoid",
+      url: "https://www.deltanoid.in",
+      logo: "https://www.deltanoid.in/assets/logo.png",
+      telephone: "+919983742739",
+      email: "admin@deltanoid.in",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "139, Oxford Towers, Unit 101, HAL Old Airport Road, Kodihalli",
+        addressLocality: "Bangalore",
+        addressRegion: "Karnataka",
+        postalCode: "560008",
+        addressCountry: "IN",
+      },
+      sameAs: [
+        "https://www.linkedin.com/company/deltanoid",
+        "https://www.facebook.com/deltanoid",
+      ],
+    }),
+  }}
+/>
+
+🧩 3. Contact Form (Next API + Frontend)
+app/contact/page.tsx
+"use client";
+import { useState } from "react";
+
+export default function ContactPage() {
+  const [status, setStatus] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const body = Object.fromEntries(formData.entries());
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (res.ok) {
+      setStatus("Thanks — we will contact you soon!");
+      form.reset();
+    } else setStatus("Submission failed. Try again later.");
+  }
+
+  return (
+    <main className="p-6">
+      <h1 className="text-3xl font-semibold mb-4">Contact Us</h1>
+      <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+        <label className="block">
+          Name*
+          <input name="name" required className="input" />
+        </label>
+        <label className="block">
+          Email*
+          <input name="email" type="email" required className="input" />
+        </label>
+        <label className="block">
+          Company
+          <input name="company" className="input" />
+        </label>
+        <label className="block">
+          What You Need Help With*
+          <select name="need" required className="input">
+            <option value="">Select...</option>
+            <option>Build an app / SaaS</option>
+            <option>Performance marketing</option>
+            <option>Reputation & content</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label className="block">
+          Message
+          <textarea name="message" rows={4} className="input" />
+        </label>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded-md"
+        >
+          Submit
+        </button>
+      </form>
+      {status && <p className="mt-4 text-green-600">{status}</p>}
+    </main>
+  );
+}
+
+app/api/contact/route.ts
+import { NextResponse } from "next/server";
+
+export async function POST(req: Request) {
+  const data = await req.json();
+  const { name, email, need } = data;
+  if (!name || !email || !need)
+    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+
+  // TODO: integrate reCAPTCHA, send to CRM, store lead
+  console.log("Lead:", data);
+
+  return NextResponse.json({ status: "ok" });
+}
+
+
+✅ Uses Next API Routes (App Router style)
+✅ Ready to connect to Slack, CRM, or database
+✅ Works with any static hosting or Vercel deployment
+
+🧩 4. Accessibility & Global Styles
+app/globals.css
+:root {
+  --brand: #0b5cff;
+  --text: #0f1724;
+}
+
+body {
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  background: #fff;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  width: 100%;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px #0b5cff33;
+}
+
+🧩 5. Image Optimization
+
+Use Next/Image everywhere instead of <img>:
+
+import Image from "next/image";
+
+<Image
+  src="/assets/hero-1024.webp"
+  alt="Deltanoid team collaborating"
+  width={1024}
+  height={640}
+  priority
+  sizes="(max-width:768px) 100vw, 1024px"
+/>
+
+
+✅ Automatically adds lazy loading, responsive srcset, WebP, and fetch priority.
+
+🧩 6. Performance & Loading Optimization
+
+Move analytics/chat scripts using <Script>:
+
+<Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXX" strategy="afterInteractive" />
+<Script id="gtag-init" strategy="afterInteractive">
+  {`window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXX');`}
+</Script>
+
+
+Use next/script strategy="lazyOnload" for non-critical third-party scripts.
+
+Compress static images (next/image does it automatically).
+
+Remove unused code via analyze mode.
+
+🧩 7. Security & SEO Headers
+next.config.js
+const securityHeaders = [
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "geolocation=(), microphone=()" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+];
+
+export default {
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders,
+      },
+    ];
+  },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    domains: ["deltanoid.in"],
+  },
+  reactStrictMode: true,
+  poweredByHeader: false,
+};
+
+
+✅ Adds essential security headers
+✅ Improves SEO crawl performance via correct canonical + meta from metadata

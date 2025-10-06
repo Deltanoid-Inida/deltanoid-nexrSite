@@ -1,0 +1,72 @@
+// app/contact/page.tsx
+"use client";
+import { useState } from "react";
+
+export default function ContactPage() {
+  const [status, setStatus] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const body = Object.fromEntries(formData.entries());
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (res.ok) {
+      setStatus("Thanks — we will contact you soon!");
+      form.reset();
+    } else setStatus("Submission failed. Try again later.");
+  }
+
+  return (
+    <main className="container">
+      <h1>Let's Make Growth Easy.</h1>
+      <p>Whether you want more bookings, more installs, or more visibility — we'll help you get there, stress-free.</p>
+
+      <form onSubmit={handleSubmit} id="contactForm" className="space-y-4" aria-live="polite">
+        <label>
+          Name*
+          <input name="name" className="input" required />
+        </label>
+
+        <label>
+          Email*
+          <input name="email" type="email" className="input" required />
+        </label>
+
+        <label>
+          Company / Brand
+          <input name="company" className="input" />
+        </label>
+
+        <label>
+          What You Need Help With*
+          <select name="need" className="input" required>
+            <option value="">Select an option</option>
+            <option>Build an app / SaaS</option>
+            <option>Performance marketing</option>
+            <option>Reputation & content</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label>
+          Message (optional)
+          <textarea name="message" rows={4} className="input" />
+        </label>
+
+        <input type="hidden" name="recaptchaToken" id="recaptchaToken" />
+
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="submit" className="btn-primary">Start Your Growth Journey</button>
+        </div>
+
+        {status && <p role="status">{status}</p>}
+      </form>
+    </main>
+  );
+}

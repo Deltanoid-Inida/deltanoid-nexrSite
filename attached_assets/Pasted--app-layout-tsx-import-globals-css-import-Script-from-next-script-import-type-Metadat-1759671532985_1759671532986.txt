@@ -1,0 +1,73 @@
+// app/layout.tsx
+import "./globals.css";
+import Script from "next/script";
+import type { Metadata } from "next";
+import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Deltanoid — We Build. We Scale. You Relax.",
+  description:
+    "Deltanoid helps businesses scale across SaaS, hospitality and wellness — combining product, marketing and reputation to deliver measurable growth.",
+  metadataBase: new URL("https://www.deltanoid.in"),
+  alternates: { canonical: "https://www.deltanoid.in" },
+  openGraph: {
+    title: "Deltanoid — We Build. We Scale. You Relax.",
+    description:
+      "Your trusted partner for SaaS, marketing and reputation management. Smart tech. Proven results. Zero chaos.",
+    url: "https://www.deltanoid.in",
+    siteName: "Deltanoid",
+    images: [
+      {
+        url: "/assets/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Deltanoid — Digital Growth Agency",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Deltanoid — We Build. We Scale. You Relax.",
+    description:
+      "Your trusted partner for SaaS, marketing and reputation management.",
+    images: ["/assets/og-image.jpg"],
+  },
+  themeColor: "#0b5cff",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head />
+      <body>
+        {/* LocalBusiness JSON-LD */}
+        <Script id="ldjson" type="application/ld+json" strategy="afterInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: "Deltanoid",
+            url: "https://www.deltanoid.in",
+            logo: "https://www.deltanoid.in/assets/logo.png",
+            telephone: "+919983742739",
+            email: "admin@deltanoid.in",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "139, Oxford Towers, Unit 101, HAL Old Airport Road, Kodihalli",
+              addressLocality: "Bangalore",
+              addressRegion: "Karnataka",
+              postalCode: "560008",
+              addressCountry: "IN",
+            },
+            sameAs: ["https://www.linkedin.com/company/deltanoid", "https://www.facebook.com/deltanoid"],
+          })}
+        </Script>
+
+        {/* Preload hint for hero image (keeps LCP intact) */}
+        <link rel="preload" href="/assets/hero-1024.webp" as="image" />
+
+        {children}
+      </body>
+    </html>
+  );
+}

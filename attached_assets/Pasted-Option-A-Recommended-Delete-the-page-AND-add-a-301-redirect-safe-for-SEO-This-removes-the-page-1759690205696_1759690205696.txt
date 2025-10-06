@@ -1,0 +1,163 @@
+Option A — Recommended: Delete the page AND add a 301 redirect (safe for SEO)
+
+This removes the page but keeps incoming links working by redirecting to another page (e.g., /contact or /).
+
+1 — Delete the route files
+
+If using app router:
+
+# from repl root
+# remove the Lets Talk page directory
+rm -rf app/lets-talk
+# or if file-based, e.g. app/lets-talk/page.tsx
+rm -f app/lets-talk/page.tsx
+
+
+If using pages router:
+
+rm -f pages/lets-talk.js pages/lets-talk.tsx pages/lets-talk/index.js
+
+
+Commit the change:
+
+git add -A
+git commit -m "chore: remove /lets-talk route"
+
+2 — Add a permanent redirect in next.config.js
+
+Add or edit next.config.js at project root to include:
+
+/** next.config.js */
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/lets-talk',
+        destination: '/',         // change to '/contact' or any other page you prefer
+        permanent: true,          // 301 redirect
+      },
+      // keep other redirects here
+    ];
+  },
+  // other next config...
+};
+
+
+If you already have redirects array, just add the object to it. Commit the change.
+
+3 — Remove nav / footer links and internal references
+
+Search & update links:
+
+# find occurrences
+rg "lets-talk" || grep -R "lets-talk" -n .
+
+# Replace or remove links in header/footer/components
+# e.g. in header component: remove <Link href="/lets-talk"> or change to <Link href="/contact">
+
+4 — Update sitemap generation to exclude the route (if using next-sitemap)
+
+If using next-sitemap, add /lets-talk to exclude in next-sitemap.config.js:
+
+module.exports = {
+  siteUrl: 'https://<YOUR_DOMAIN>',
+  generateRobotsTxt: true,
+  exclude: ['/lets-talk'],
+  // ...
+};
+
+
+Then rebuild / run postbuild to regenerate sitemap.
+
+5 — Rebuild & restart on Replit
+
+In the Replit console:
+
+npm run build
+# then restart run (or press Run in UI)
+# optionally:
+npm run start
+
+6 — Verify the change
+
+Run these checks (replace <REPL_URL> with your Replit URL or domain):
+
+# expect 301 redirect to destination
+curl -I https://<REPL_URL>/lets-talk
+
+# verify page removed (should redirect) and new destination returns 200
+curl -I https://<REPL_URL>/  # or /contact
+
+# search for lingering references
+rg "lets-talk" || grep -R "lets-talk" -n .
+
+
+Also open the preview in browser and click any old /lets-talk link to confirm redirect.
+
+Option B — Hard delete WITHOUT redirect (only if you really want it gone)
+
+Delete the route directory/file (same rm -rf app/lets-talk or rm pages/lets-talk.*).
+
+Remove links and references (search & replace).
+
+Rebuild and restart.
+
+Verify curl -I https://<REPL_URL>/lets-talk returns 404.
+
+Note: This can produce 404s for incoming links and lose existing SEO value. Use only if you’re sure.
+
+Extra: If you want to keep a placeholder page that informs users
+
+Instead of redirecting, you can create a small placeholder at /lets-talk explaining the change and linking to contact — useful if you want a graceful UX:
+
+app/lets-talk/page.tsx
+
+export default function Page() {
+  return (
+    <main style={{padding: '4rem', textAlign: 'center'}}>
+      <h1>Let's Talk — Moved</h1>
+      <p>We've moved our contact page. Please visit <a href="/contact">Contact Us</a> or <a href="/">Home</a>.</p>
+    </main>
+  );
+}
+
+Update tests & QA
+
+Remove or update any Playwright / Cypress test that expects /lets-talk.
+
+If you run sitemap/Lighthouse checks as part of CI, update configs to reflect the redirect.
+
+Re-run Lighthouse to confirm no broken links or 404s remain.
+
+Example test updates (Playwright):
+
+// old
+await page.goto('/lets-talk');
+// new (if redirected)
+await page.goto('/lets-talk');
+await expect(page).toHaveURL('/'); // expecting redirect to home
+
+// or point tests directly to /contact
+await page.goto('/contact');
+
+Quick checklist for you to run (one-shot)
+
+Copy & paste into Replit console:
+
+# 1. delete route
+rm -rf app/lets-talk || rm -f pages/lets-talk.*
+
+# 2. add redirect (if not already in next.config.js, edit file manually)
+# (skip this step if you choose Option B)
+
+# 3. remove references
+rg "lets-talk" || true
+
+# 4. commit
+git add -A && git commit -m "chore: remove /lets-talk route and handle redirect" || true
+
+# 5. build
+npm run build
+
+# 6. verify
+curl -I https://<REPL_URL>/lets-talk

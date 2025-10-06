@@ -1,0 +1,139 @@
+App builds & starts
+
+npm run build completes without errors.
+
+npm start (or next start) serves the production build.
+
+Commands: next build && next start (or your PM2/systemd start).
+
+Basic navigation & routing
+
+All static pages load (status 200).
+
+Dynamic routes (e.g., /product/[id]) render for valid and invalid ids (404 for invalid).
+
+Client-side navigation using next/link works (no full page reloads unless intended).
+
+Test: click links, use browser back/forward.
+
+Contact / lead forms & inputs
+
+Required validation client + server.
+
+Successful submit shows success message and stores/sends lead.
+
+Failure shows friendly error and retry option.
+
+Anti-spam: honeypot or reCAPTCHA present and effective.
+
+API routes
+
+All pages/api/* endpoints respond with expected status codes and payloads.
+
+Validate both success and error responses.
+
+Protect endpoints that require auth.
+
+Authentication & session flows (if applicable)
+
+Login, logout, token refresh, protected pages redirect to login.
+
+Session expires and forces re-login.
+
+SSG / SSR / ISR behavior
+
+getStaticProps pages build with correct data.
+
+getServerSideProps pages render on request (test with toggled server data).
+
+ISR: revalidate works — updated content appears after revalidation interval.
+
+Images
+
+Next/Image loads correctly, no layout shift. Check priority and placeholder usage.
+
+next/image produces properly sized images, avoids oversized images in HTML.
+
+Performance (production build)
+
+Lighthouse: Performance ≥ target (e.g., >90), LCP, FID/TBT, CLS within limits.
+
+Bundle size: check next build output and next analyse or webpack-bundle-analyzer.
+
+Remove large unused JS, defer non-critical scripts.
+
+# High-priority checks (user experience & SEO)
+
+SEO meta tags & HTTP headers
+
+<title>, <meta name="description">, canonical, Open Graph & Twitter cards.
+
+<link rel="canonical"> for duplicated content.
+
+Server sends correct Content-Type, caching headers.
+
+Structured data
+
+JSON-LD valid for Organization/Product etc. (test with Google Rich Results test).
+
+Sitemap & robots
+
+/robots.txt and sitemap.xml present and accurate.
+
+Accessibility (a11y)
+
+Form labels, keyboard navigation, focus order, aria attributes.
+
+Color contrast passes WCAG AA.
+
+Run axe-core or Lighthouse accessibility audit.
+
+Localization / i18n
+
+Localized content loads, language switch persists.
+
+next-i18next or Next's i18n routing works.
+
+Social previews
+
+Share links on WhatsApp / Twitter / LinkedIn show right OG image & text.
+
+# Medium-priority checks (security, infra)
+
+Security headers
+
+Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, Referrer-Policy.
+
+Environment variables
+
+No secret env var exposed client-side (only NEXT_PUBLIC_ vars should be client-visible).
+
+Rate limiting & abuse
+
+Bruteforce protections for auth routes, rate-limits for public endpoints.
+
+Dependency vulnerabilities
+
+npm audit or pnpm audit and fix high-severity items.
+
+# Low-priority / enhancements
+
+Analytics & conversion tracking
+
+GA4 or GTM events fire on important actions (contact form, signup).
+
+Error logging
+
+Sentry / LogRocket integration capture SSR and client errors.
+
+Progressive enhancement
+
+Site works with JS disabled for critical content (if required).
+
+# Cross-browser & device matrix
+
+Desktop: Chrome (latest), Firefox (latest), Safari (macOS latest), Edge.
+
+Mobile: iOS Safari (real device), Android Chrome (real device).
+
+Screen sizes: test common breakpoints and ensure no horizontal scroll or clipped buttons.

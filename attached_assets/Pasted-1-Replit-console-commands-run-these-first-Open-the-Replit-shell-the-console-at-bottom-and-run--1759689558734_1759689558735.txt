@@ -1,0 +1,175 @@
+1) Replit console commands — run these first
+
+Open the Replit shell (the console at bottom) and run:
+
+# 1. Confirm the file exists in project
+ls -la public/assets | sed -n '1,200p'
+
+# 2. If running dev server locally on Replit (port shown in Replit logs),
+#    test the asset URL using the app's preview domain (use your primary Replit URL)
+# Replace <REPL_URL> with your repl preview domain, e.g. delta-noid-ashishmodi3.replit.app
+curl -I https://<REPL_URL>/assets/hero-1024.webp
+
+# 3. Test homepage metadata (quick grep)
+curl -s https://<REPL_URL>/ | grep -E '<title>|meta name="description"|og:|twitter:|rel="canonical"|robots' -n
+
+# 4. Check sitemap and robots
+curl -I https://<REPL_URL>/sitemap.xml
+curl -I https://<REPL_URL>/robots.txt
+
+# 5. Build & run locally to check for build errors
+npm run build || npm run build --if-present
+# If build succeeds, run:
+npm run start || npm run start --if-present
+
+
+If any curl returns 404 or curl: (6) Could not resolve host, your Replit preview URL may not be publicly reachable (Replit sometimes requires the repl to be running). Make sure the Repl is running (click Run).
+
+2) Fix the /assets/hero-1024.webp 404 — two reliable options
+Option A — Static file in public/ (recommended for simple static assets)
+
+Put the file at: project-root/public/assets/hero-1024.webp.
+
+Reference it in HTML/JSX as /assets/hero-1024.webp (no leading public/ in path).
+
+Verify in console:
+
+ls -la public/assets/hero-1024.webp
+curl -I https://<REPL_URL>/assets/hero-1024.webp
+# Expect HTTP/1.1 200 OK
+
+Option B — Use next/image import (recommended if you want optimized images)
+
+Place the file under public/assets/hero-1024.webp or import from file-system:
+
+// app/components/Hero.tsx (or wherever hero lives)
+import Image from 'next/image';
+import heroImg from '/public/assets/hero-1024.webp'; // Note: when using next/image with a file import
+
+export default function Hero() {
+  return (
+    <section>
+      <Image src={heroImg} alt="Hero: Deltanoid services" width={1024} height={576} priority />
+      {/* or <Image src="/assets/hero-1024.webp" alt="..." width={1024} height={576} /> */}
+    </section>
+  );
+}
+
+
+Important: If you previously referenced src="/assets/hero-1024.webp" but the file was never added to public/, you will get 404. Put the file in public/ or adjust path.
+
+3) Add SEO metadata (drop into app/head.tsx or your page head)
+
+Create or edit app/head.tsx:
+
+// app/head.tsx
+export default function Head() {
+  return (
+    <>
+      <title>Deltanoid — We Build. We Scale. You Relax.</title>
+      <meta name="description" content="Deltanoid: SaaS development, growth marketing and reputation management for spas, resorts and startups. Book a free consultation." />
+      <link rel="canonical" href="https://<YOUR_DOMAIN_OR_REPL_URL>/" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Deltanoid — We Build. We Scale. You Relax." />
+      <meta property="og:description" content="SaaS development, growth marketing and reputation management. Book a free consultation." />
+      <meta property="og:image" content="https://<YOUR_DOMAIN_OR_REPL_URL>/assets/og-image.jpg" />
+      <meta property="og:url" content="https://<YOUR_DOMAIN_OR_REPL_URL>/" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      {/* Organization JSON-LD */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"Organization",
+        "name":"Deltanoid",
+        "url":`https://<YOUR_DOMAIN_OR_REPL_URL>`,
+        "logo":`https://<YOUR_DOMAIN_OR_REPL_URL>/assets/logo.png`,
+        "sameAs":[ "https://www.linkedin.com/in/your", "https://twitter.com/your" ],
+        "contactPoint": [{ "@type": "ContactPoint", "telephone": "+91-XXXXXXXXXX", "contactType": "customer service", "areaServed": "IN" }]
+      }) }} />
+    </>
+  );
+}
+
+
+— Replace <YOUR_DOMAIN_OR_REPL_URL> with your Replit URL while testing, and swap to your real domain on production.
+
+4) Generate sitemap.xml on Replit (quick approach)
+
+Install and use next-sitemap:
+
+# in Replit console
+npm install next-sitemap --save-dev
+
+
+Add next-sitemap.config.js to project root:
+
+module.exports = {
+  siteUrl: 'https://<YOUR_DOMAIN_OR_REPL_URL>',
+  generateRobotsTxt: true,
+  changefreq: 'weekly',
+  priority: 0.7,
+  sitemapSize: 7000,
+};
+
+
+Add to package.json:
+
+"scripts": {
+  "postbuild": "next-sitemap"
+}
+
+
+Now run:
+
+npm run build
+# after build completes, postbuild will generate sitemap.xml and robots.txt
+ls -la .next/sitemap* || ls -la public/sitemap*
+# copy to public if needed or ensure next-sitemap writes to public/
+
+
+Then verify:
+
+curl -I https://<REPL_URL>/sitemap.xml
+curl -I https://<REPL_URL>/robots.txt
+
+5) Quick SEO verification commands (run in Replit console)
+# Check title & description & OG
+curl -s https://<REPL_URL>/ | grep -E '<title>|meta name="description"|og:|twitter:|rel="canonical"' -n
+
+# Check pages return 200 (replace paths)
+curl -I https://<REPL_URL>/
+curl -I https://<REPL_URL>/lets-talk
+curl -I https://<REPL_URL>/who-we-are
+
+# Confirm hero image reachable
+curl -I https://<REPL_URL>/assets/hero-1024.webp
+
+
+If any curl -I returns 404 for pages, check your Next.js routes (app/page.tsx or app/route) and confirm they are compiled into the build.
+
+6) Checklist: SEO & bug checks to finish on Replit
+
+Must do:
+
+ Put hero-1024.webp into public/assets/ or import via next/image.
+
+ Ensure app/head.tsx contains title & meta description.
+
+ Create sitemap.xml + robots.txt (use next-sitemap).
+
+ Make sure no <meta name="robots" content="noindex"> exists on production pages.
+
+ Verify all images have alt attributes.
+
+ Fix any 4xx/5xx asset or API route errors shown in Replit logs or DevTools.
+
+ Ensure the Repl is running (click Run) so external curl can fetch the preview URL.
+
+Highly recommended:
+
+ Run Lighthouse/Pagespeed locally (open the Replit preview in Chrome → DevTools → Lighthouse).
+
+ Add Open Graph / Twitter image (1200×630) to public/assets/og-image.jpg.
+
+ Add structured data where appropriate (FAQ, Article, Service).
