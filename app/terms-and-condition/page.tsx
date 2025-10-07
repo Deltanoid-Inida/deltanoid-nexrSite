@@ -438,7 +438,7 @@ export default function TermsOfUse() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="hover-elevate transition-all duration-300">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-foreground mb-4">15. Dispute Resolution</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-4">14. Dispute Resolution</h3>
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-foreground mb-2">Governing Law</h4>
@@ -461,15 +461,15 @@ export default function TermsOfUse() {
                 <h3 className="text-2xl font-bold text-foreground mb-4">Additional Provisions</h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">16. Force Majeure</h4>
+                    <h4 className="font-semibold text-foreground mb-2">15. Force Majeure</h4>
                     <p className="text-sm text-muted-foreground">No liability for delays due to circumstances beyond reasonable control.</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">17. Modifications</h4>
+                    <h4 className="font-semibold text-foreground mb-2">16. Modifications</h4>
                     <p className="text-sm text-muted-foreground">We reserve the right to modify these Terms. Continued use signifies acceptance of updates.</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">13. Indemnification</h4>
+                    <h4 className="font-semibold text-foreground mb-2">17. Indemnification</h4>
                     <p className="text-sm text-muted-foreground">Client indemnifies Deltanoid from claims arising from Client's use or breach of Terms.</p>
                   </div>
                 </div>
