@@ -407,6 +407,65 @@
     z-index: 999;
   }
 
+  /* Chatbot typing dots */
+  .typing-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: rgba(59,130,246,0.9); /* primary */
+    border-radius: 9999px;
+    opacity: 0.2;
+    transform: translateY(0);
+    animation: typingDot 1s infinite ease-in-out;
+  }
+
+  .dot.delay-150 { animation-delay: 0.15s; }
+  .dot.delay-300 { animation-delay: 0.3s; }
+
+  @keyframes typingDot {
+    0% { opacity: 0.2; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-6px); }
+    100% { opacity: 0.2; transform: translateY(0); }
+  }
+
+  /* Custom scrollbar for chat history */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(59,130,246,0.18), rgba(59,130,246,0.08));
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  /* Small helper for typing dot delays used on container spans */
+  .delay-150 { animation-delay: 150ms; }
+  .delay-300 { animation-delay: 300ms; }
+
+  /* small bounce for open button */
+  @keyframes smallBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  .animate-bounce { animation: smallBounce 1.2s infinite ease-in-out; }
+
+  /* Ensure chat message bubbles wrap and calculate width correctly */
+  .chat-bubble {
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
   .hover-elevate:hover:not(.no-default-hover-elevate)::after,
   .active-elevate:active:not(.no-default-active-elevate)::after {
     background-color: var(--elevate-1);

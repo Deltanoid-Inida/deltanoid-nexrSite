@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 
 // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
-const openai = new OpenAI({ apiKey: "process.env.OPENAI_API_KEY" });
+const openai = new OpenAI({ apiKey: `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` });
 
 export interface LeadQualification {
   score: number;
