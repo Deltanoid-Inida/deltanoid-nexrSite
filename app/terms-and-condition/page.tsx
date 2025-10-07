@@ -103,7 +103,7 @@ export default function TermsOfUse() {
       </section>
 
       {/* Contact Information */}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -173,7 +173,7 @@ export default function TermsOfUse() {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Definitions */}
       <section className="py-16 bg-card/50">
@@ -480,7 +480,7 @@ export default function TermsOfUse() {
       </section>
 
       {/* Final Contact Information */}
-      <section className="py-16 bg-card/50">
+      {/* <section className="py-16 bg-card/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Card className="hover-elevate transition-all duration-300">
             <CardContent className="p-8">
@@ -512,7 +512,7 @@ export default function TermsOfUse() {
             </CardContent>
           </Card>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section className="py-16">

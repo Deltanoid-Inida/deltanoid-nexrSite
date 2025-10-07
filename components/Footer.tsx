@@ -146,12 +146,12 @@ export default function Footer() {
             © 2025 Deltanoid. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy">
+            <Link href="/privacy-policy">
               <span className="text-muted-foreground hover:text-primary hover:translate-x-1 transition-all duration-300 text-sm">
                 Privacy Policy
               </span>
             </Link>
-            <Link href="/terms">
+            <Link href="/terms-and-condition">
               <span className="text-muted-foreground hover:text-primary hover:translate-x-1 transition-all duration-300 text-sm">
                 Terms of Service
               </span>
