@@ -222,6 +222,142 @@
     @apply hidden;
   }
 
+  /* Custom animations for enhanced homepage */
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-gradient {
+    animation: gradient 6s ease infinite;
+  }
+
+  .bg-300\% {
+    background-size: 300% 300%;
+  }
+
+  /* Staggered animation delays */
+  .delay-150 {
+    animation-delay: 150ms;
+  }
+  
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .delay-450 {
+    animation-delay: 450ms;
+  }
+  
+  .delay-600 {
+    animation-delay: 600ms;
+  }
+  
+  .delay-750 {
+    animation-delay: 750ms;
+  }
+  
+  .delay-900 {
+    animation-delay: 900ms;
+  }
+
+  .delay-1050 {
+    animation-delay: 1050ms;
+  }
+
+  /* Custom fade in animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-fadeInLeft {
+    animation: fadeInLeft 0.8s ease-out forwards;
+  }
+
+  .animate-fadeInRight {
+    animation: fadeInRight 0.8s ease-out forwards;
+  }
+
+  .animate-slideInFromBottom {
+    animation: slideInFromBottom 1s ease-out forwards;
+  }
+
+  /* Floating animation for icons */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Pulse glow effect */
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  .animate-pulseGlow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
   /* Placeholder styling for contentEditable div */
   [contenteditable][data-placeholder]:empty::before {
     content: attr(data-placeholder);
