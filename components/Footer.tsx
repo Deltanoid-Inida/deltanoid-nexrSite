@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Linkedin, Twitter, Github, Mail, Phone, MapPin, Sparkles, Heart, Globe2, Rocket } from 'lucide-react';
+import { ne } from 'drizzle-orm';
 
 export default function Footer() {
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -143,7 +144,7 @@ export default function Footer() {
 
         <div className="border-t border-primary/20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center animate-fade-in-up delay-750 bg-gradient-to-r from-transparent via-primary/5 to-transparent">
           <p className="text-muted-foreground text-sm hover:text-foreground/80 transition-colors duration-300">
-            © 2025 Deltanoid. All rights reserved.
+            © {new Date().getFullYear()} Deltanoid. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/privacy-policy">
