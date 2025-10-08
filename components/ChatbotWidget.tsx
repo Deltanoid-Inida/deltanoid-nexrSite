@@ -169,7 +169,7 @@ export default function ChatbotWidget() {
 
       {!isOpen && (
         <Button
-          style={{position:"fixed",}}
+          style={{position:"fixed",zIndex:9999}}
           onClick={() => setIsOpen(true)}
           size="icon"
           aria-label="Open chat"

@@ -186,13 +186,13 @@ export default function Home() {
         {/* Floating Icons */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-1/4 animate-bounce delay-300">
-            <Sparkles className="h-6 w-6 text-primary/30" />
+            {/* <Sparkles className="h-6 w-6 text-primary/30" /> */}
           </div>
           <div className="absolute top-32 right-1/4 animate-bounce delay-700">
-            <Rocket className="h-8 w-8 text-primary/40" />
+            {/* <Rocket className="h-8 w-8 text-primary/40" /> */}
           </div>
           <div className="absolute bottom-32 left-1/6 animate-bounce delay-500">
-            <Award className="h-7 w-7 text-primary/35" />
+            {/* <Award className="h-7 w-7 text-primary/35" /> */}
           </div>
         </div>
 

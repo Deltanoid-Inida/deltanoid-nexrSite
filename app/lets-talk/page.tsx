@@ -113,16 +113,16 @@ export default function LetsTalk() {
         {/* Floating Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 animate-float delay-0">
-            <Heart className="h-8 w-8 text-primary/20" />
+            {/* <Heart className="h-8 w-8 text-primary/20" /> */}
           </div>
           <div className="absolute top-32 right-16 animate-float delay-300">
-            <Sparkles className="h-6 w-6 text-primary/20" />
+            {/* <Sparkles className="h-6 w-6 text-primary/20" /> */}
           </div>
           <div className="absolute bottom-20 left-20 animate-float delay-700">
-            <Users className="h-10 w-10 text-primary/20" />
+            {/* <Users className="h-10 w-10 text-primary/20" /> */}
           </div>
           <div className="absolute bottom-32 right-12 animate-float delay-500">
-            <Target className="h-7 w-7 text-primary/20" />
+            {/* <Target className="h-7 w-7 text-primary/20" /> */}
           </div>
         </div>
         
