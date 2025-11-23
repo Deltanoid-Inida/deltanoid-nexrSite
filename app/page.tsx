@@ -32,8 +32,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   const clients = [
-    "Adhira Spa", "Nava", "Ayara", "Nirantara Resort", "Modern Zen Spa",
-    "DevTown", "Sundown Pub", "More..."
+    "Spa", "Spa", "Spa", "Resort", "Spa",
+    "DevTown", "Pub", "More..."
   ];
 
   const services = [
