@@ -30,7 +30,7 @@ export default function OurWork() {
       results: "3x ROI within 90 days, stronger premium brand positioning in Indiranagar. Established itself as a go-to spa for discerning customers."
     },
     {
-      title: "Modern Zen Spa",
+      title: "Spa",
       location: "Gurgaon",
       category: "Wellness & Lifestyle",
       challenge: "A new spa launch in Gurgaon, Modern Zen faced the challenge of being virtually unknown in a crowded market.",
@@ -38,7 +38,7 @@ export default function OurWork() {
       results: "200+ monthly leads generated within 3 months. Fast traction in a new market, became one of the most booked premium spas in the area."
     },
     {
-      title: "Nirantara Resort",
+      title: "Resort",
       location: "Bangalore",
       category: "Hospitality & Resorts",
       challenge: "Strong weekend traffic but struggled with weekday occupancy. Despite being a luxury retreat near the city, lacked consistent online visibility and direct bookings during off-peak days.",
@@ -46,7 +46,7 @@ export default function OurWork() {
       results: "416K+ profile views in a year, 12,000+ direction requests, 3x increase in weekday bookings. Growth became steady, not seasonal — giving the resort a reliable revenue flow."
     },
     {
-      title: "Natural Body Spa",
+      title: "Spa",
       location: "JP Nagar, Bangalore",
       category: "Wellness & Lifestyle",
       challenge: "Had loyal clients but wanted to attract more new customers through search and maps. Despite being centrally located, their digital presence wasn't converting into foot traffic effectively.",
@@ -54,7 +54,7 @@ export default function OurWork() {
       results: "133K+ total views across Google search & maps, 4,000+ calls generated directly from profile. Consistent monthly leads, turning Maps visibility into real walk-ins without relying solely on word-of-mouth."
     },
     {
-      title: "Ayara International Thai Spa",
+      title: "Spa",
       location: "AECS Layout, Bangalore",
       category: "Wellness & Lifestyle",
       challenge: "Wanted to position itself as a premium experience in a competitive neighborhood. Their online presence wasn't reflecting the luxury and uniqueness of their offerings like jacuzzi & hammam.",
@@ -62,7 +62,7 @@ export default function OurWork() {
       results: "55K+ profile views within a year, 1,200+ direct calls from potential customers. Consistent bookings and now recognized as one of the top spa destinations in AECS Layout."
     },
     {
-      title: "Sundown Pub",
+      title: "Pub",
       location: "Electronic City, Bangalore",
       category: "Hospitality & Resorts",
       challenge: "Despite great ambience, struggled with weak local reach and low weekend turnout.",
