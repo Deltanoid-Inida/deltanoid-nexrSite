@@ -14,7 +14,7 @@ export default function OurWork() {
 
   const projects = [
     {
-      title: "Adhira Wellness Spa",
+      title: "Spa",
       location: "Bangalore",
       category: "Wellness & Lifestyle",
       challenge: "Struggling with low visibility and inconsistent walk-ins despite being in a prime location.",
@@ -22,7 +22,7 @@ export default function OurWork() {
       results: "40% increase in walk-ins, consistent 4.6★ average rating. Went from under-the-radar to a well-recognized neighborhood favorite."
     },
     {
-      title: "Nava Luxury Spa",
+      title: "Spa",
       location: "Indiranagar, Bangalore",
       category: "Wellness & Lifestyle",
       challenge: "Needed to stand out in the highly competitive Indiranagar market, where dozens of spas fight for attention.",
